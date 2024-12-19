@@ -18,6 +18,10 @@ module Hotwire::Spark
       end
     end
 
+    initializer "hotwire_spark.assets" do |app|
+      app.config.assets.paths << root.join("app/assets/javascripts")
+    end
+
     initializer "hotwire_spark.install" do |application|
       Hotwire::Spark.install_into application if Hotwire::Spark.enabled?
     end
