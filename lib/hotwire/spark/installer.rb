@@ -11,9 +11,6 @@ class Hotwire::Spark::Installer
   end
 
   def configure_middleware
-    ::ActionCable::Server::Base.prepend(Hotwire::Spark::ActionCable::PersistentCableServer)
-
-    middleware.insert_before ActionDispatch::Executor, Hotwire::Spark::ActionCable::PersistentCableMiddleware
     middleware.use Hotwire::Spark::Middleware
   end
 
@@ -39,7 +36,7 @@ class Hotwire::Spark::Installer
     end
 
     def broadcast_reload_action(action, file_path)
-      ActionCable.server.broadcast "hotwire_spark", reload_message_for(action, file_path)
+      Hotwire::Spark.cable_server.broadcast "hotwire_spark", reload_message_for(action, file_path)
     end
 
     def reload_message_for(action, file_path)
