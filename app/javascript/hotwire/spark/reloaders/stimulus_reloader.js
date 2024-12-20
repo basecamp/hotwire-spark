@@ -1,4 +1,3 @@
-import { Application } from "@hotwired/stimulus"
 import { log } from "../logger.js"
 import { cacheBustedUrl, reloadHtmlDocument } from "../helpers.js"
 
@@ -11,7 +10,7 @@ export class StimulusReloader {
   constructor(document, filePattern = /./) {
     this.document = document
     this.filePattern = filePattern
-    this.application = window.Stimulus || Application.start()
+    this.application = window.Stimulus
   }
 
   async reload() {

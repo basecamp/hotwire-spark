@@ -41,5 +41,6 @@ export default {
       ],
       exclude: "node_modules/**",
     }),
-  ]
+  ],
+  external: ["@hotwired/stimulus"],
 }
