@@ -23,5 +23,11 @@ module Hotwire::Spark
     def enabled?
       enabled && defined?(Rails::Server)
     end
+
+    def cable_server
+      @server ||= Hotwire::Spark::ActionCable::Server.new(config: ::ActionCable::Server::Base.config.dup).tap do |server|
+        server.config.connection_class = -> { ::ActionCable::Connection::Base }
+      end
+    end
   end
 end

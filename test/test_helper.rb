@@ -16,18 +16,11 @@ end
 
 require "helpers/files_helper"
 
-::ActionCable::Server::Base.prepend(Hotwire::Spark::ActionCable::PersistentCableServer)
-
 class ActiveSupport::TestCase
   include FilesHelper
 
   setup do
     reload_rails_reloader
-    ActionCable.server.suppress_restarts = true
-  end
-
-  teardown do
-    ActionCable.server.suppress_restarts = false
   end
 
   private

@@ -512,7 +512,7 @@ var HotwireSpark = (function () {
     }
   }
 
-  var consumer = createConsumer();
+  var consumer = createConsumer("/hotwire-spark");
 
   function assetNameFromPath(path) {
     return path.split("/").pop().split(".")[0];
