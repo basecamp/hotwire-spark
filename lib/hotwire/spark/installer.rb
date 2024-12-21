@@ -36,7 +36,13 @@ class Hotwire::Spark::Installer
     end
 
     def broadcast_reload_action(action, file_path)
-      Hotwire::Spark.cable_server.broadcast "hotwire_spark", reload_message_for(action, file_path)
+      broadcast_mutex.synchronize do
+        Hotwire::Spark.cable_server.broadcast "hotwire_spark", reload_message_for(action, file_path)
+      end
+    end
+
+    def broadcast_mutex
+      @broadcast_mutex ||= Mutex.new
     end
 
     def reload_message_for(action, file_path)
